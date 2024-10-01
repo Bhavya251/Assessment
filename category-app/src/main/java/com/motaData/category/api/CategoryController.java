@@ -2,6 +2,7 @@ package com.motaData.category.api;
 
 import com.motaData.category.api.serviceImpl.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class CategoryController {
 
     @Operation(summary = "Add a new category")
     @PostMapping("/v1.0")
-    public ResponseEntity<String> addCategory(@RequestBody Category category){
+    public ResponseEntity<String> addCategory(@RequestBody @Valid Category category){
         categoryService.addCategory(category);
         return new ResponseEntity<>("New Category Added !", HttpStatus.CREATED);
     }
@@ -56,7 +57,7 @@ public class CategoryController {
 
     @Operation(summary = "Update an existing category")
     @PutMapping("/v1.0/{id}")
-    public ResponseEntity<String> updateCategory(@PathVariable Long id, @RequestBody Category category){
+    public ResponseEntity<String> updateCategory(@PathVariable Long id, @RequestBody @Valid Category category){
         boolean result = categoryService.updateCategory(id, category);
         if (!result) {
             return new ResponseEntity<>("Category Not Found !", HttpStatus.NOT_FOUND);

@@ -2,6 +2,8 @@ package com.motaData.products.api;
 
 import com.motaData.products.api.external.Category;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "master_product")
@@ -10,9 +12,14 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productID;
+
+    @NotBlank(message = "Product name is mandatory")
     private String productName;
+
+    @NotNull
     private String productDescription;
 
+    @NotBlank(message = "Category ID is mandatory")
     private Long categoryID;
 
 

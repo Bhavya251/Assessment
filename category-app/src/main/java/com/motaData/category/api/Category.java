@@ -1,7 +1,7 @@
 package com.motaData.category.api;
 
 import jakarta.persistence.*;
-
+import jakarta.validation.constraints.NotBlank;
 
 
 @Entity
@@ -11,6 +11,8 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long categoryID;
+
+    @NotBlank(message = "Category name is mandatory")
     private String categoryName;
 
     public Category(Long categoryID, String categoryName) {
